@@ -1,0 +1,5 @@
+include ':common'
+include ':network'
+include ':app'
+includeBuild 'VersionPlugin'
+rootProject.name = "WareHouseWms"

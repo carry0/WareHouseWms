@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="20px"/>
+    <stroke android:color="@color/colorLoginCentet" android:width="3px"/>
+    <gradient
+        android:angle="180"
+        android:centerColor="@color/colorLoginCentet"
+        android:centerX="0.5"
+        android:centerY="0.5"
+        android:endColor="@color/colorLoginLeft"
+        android:startColor="@color/colorLoginRight"
+        android:type="linear"
+        />
+</shape>

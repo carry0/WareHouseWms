@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.library'
+    id 'com.yf.plugin'
+}
+
+android {
+    compileSdkVersion Config.compileSdkVersion
+    buildToolsVersion Config.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion Config.minSdkVersion
+        targetSdkVersion Config.targetSdkVersion
+        versionCode Config.versionCode
+        versionName Config.versionName
+
+        testInstrumentationRunner Config.testInstrumentationRunner
+        consumerProguardFiles Config.consumerProguardFiles
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation(Imp.constraintlayout)
+    implementation(Imp.legacy_support_v4)
+    implementation(Imp.annotations)
+    testImplementation(Imp.junit)
+    androidTestImplementation(Imp.ext_junit)
+    androidTestImplementation(Imp.espresso)
+
+    //---------------------------------------OkHttp3-------------------------------------//
+    api(Imp.okhttp3)
+    api(Imp.okhttp3_logging)
+
+    //---------------------------------------retrofit2-------------------------------------//
+    api(Imp.retrofit2)
+    api(Imp.retrofit2_gson)
+    api(Imp.retrofit2_adapter)
+
+    //---------------------------------------rxjava2-------------------------------------//
+    api(Imp.rxjava2)
+    api(Imp.rx_android)
+
+    //---------------------------------------materialUI工具-------------------------------------//
+    api(Imp.material)
+
+    //---------------------------------------navigation工具-------------------------------------//
+    api(Imp.navigation_ui)
+    api(Imp.navigation_fragment)
+}
