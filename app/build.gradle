@@ -40,8 +40,9 @@ dependencies {
     testImplementation(Imp.junit)
     androidTestImplementation(Imp.ext_junit)
     androidTestImplementation(Imp.espresso)
-
-    //---------------------------------网络框架Module-----------------------------------------//
+//    内存泄露工具
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+//    ---------------------------------网络框架Module-----------------------------------------//
     implementation project(Imp.network_model)
 
 }

@@ -19,19 +19,12 @@ public class NetWorkUtil {
     private Retrofit retrofit;
 
     public NetWorkUtil() {
-        OkHttpClient httpClient = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .callTimeout(10, TimeUnit.SECONDS)
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-//                .addInterceptor(new BaseUrlInterceptor())
-                .build();
-
         if (retrofit == null) {
             synchronized (NetWorkUtil.class) {
                 if (retrofit == null) {
                     retrofit = new Retrofit.Builder()
                             .baseUrl(ConfigManage.IP)
-                            .client(httpClient)
+                            .client(httpClient())
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();
@@ -49,6 +42,15 @@ public class NetWorkUtil {
             }
         }
         return INSTALL;
+    }
+
+    private OkHttpClient httpClient() {
+        return new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .callTimeout(10, TimeUnit.SECONDS)
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+//                .addInterceptor(new BaseUrlInterceptor())
+                .build();
     }
 
     public <T> T createService(Class<T> tClass) {

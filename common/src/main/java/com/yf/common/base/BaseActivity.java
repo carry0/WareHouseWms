@@ -42,13 +42,6 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
      */
     protected abstract void initListener();
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        binding = null;
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

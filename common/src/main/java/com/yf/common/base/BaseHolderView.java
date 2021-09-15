@@ -1,17 +1,23 @@
 package com.yf.common.base;
 
-import android.view.View;
-
 import androidx.annotation.NonNull;
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @Author
  * @cerate 2021/9/3 12:03
  **/
-public class BaseHolderView extends RecyclerView.ViewHolder {
+public class BaseHolderView<V extends ViewDataBinding> extends RecyclerView.ViewHolder {
+    V binding;
 
-    public BaseHolderView(@NonNull View itemView) {
-        super(itemView);
+    public V getBinding() {
+        return binding;
     }
+
+    public BaseHolderView(V itemView) {
+        super(itemView.getRoot());
+        this.binding = itemView;
+    }
+
 }

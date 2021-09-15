@@ -1,6 +1,8 @@
 package com.yf.warehousewms.model.login;
 
+import android.content.Intent;
 import android.util.Log;
+import android.view.Menu;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.NavigationUI;
@@ -8,15 +10,14 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.yf.common.base.BaseActivity;
+import com.yf.common.tool.ConfigManage;
 import com.yf.common.tool.SpModel;
 import com.yf.warehousewms.App;
 import com.yf.warehousewms.R;
 import com.yf.warehousewms.databinding.LoginBinding;
+import com.yf.warehousewms.model.home.MenuManageActivity;
 import com.yf.warehousewms.model.login.vm.LoginViewModel;
 
-import static com.yf.common.tool.ConfigManage.APP_TABLE;
-import static com.yf.common.tool.ConfigManage.USER_NAME;
-import static com.yf.common.tool.ConfigManage.USER_PASSWORD;
 
 public class LoginActivity extends BaseActivity<LoginBinding> {
     SpModel spModel;
@@ -29,9 +30,8 @@ public class LoginActivity extends BaseActivity<LoginBinding> {
 
     @Override
     public void initView() {
+        spModel = SpModel.getInstance(App.getInstance(), ConfigManage.APP_TABLE);
         viewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(LoginViewModel.class);
-        spModel = SpModel.getInstance(App.getInstance(), APP_TABLE);
-
         viewModel.getUpdateInfo().observe(this, versionBean -> {
 //            if (!getVersion(App.getInstance()).equals(versionBean.getVersion_no())) {
 //                downloadManage(versionBean.getUpdate_url(), this);
@@ -49,8 +49,17 @@ public class LoginActivity extends BaseActivity<LoginBinding> {
 
     private void login() {
         viewModel.doLogin("admin", "Ridko2019").observe(this, loginBean -> {
-            spModel.putData(USER_NAME, binding.etName.getText().toString());
-            spModel.putData(USER_PASSWORD, binding.etPassword.getText().toString());
+            spModel.putData(ConfigManage.HOME_MENU,new Gson().toJson(loginBean));
+            spModel.putData(ConfigManage.USER_NAME, "admin");
+            spModel.putData(ConfigManage.USER_PASSWORD, "Ridko2019");
+            startActivity(new Intent(LoginActivity.this, MenuManageActivity.class));
+            finish();
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        spModel = null;
     }
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item1"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_item2"
+            android:title="Gallery" />
+        <item
+            android:id="@+id/nav_item3"
+            android:title="Slideshow" />
+        <item
+            android:id="@+id/nav_item4"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item5"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item6"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item7"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item8"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item9"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item10"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item11"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item12"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item13"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item14"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item15"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item16"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item17"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item18"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item19"
+            android:title="Tools" />
+        <item
+            android:id="@+id/nav_item22"
+            android:title="Tools" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_about"
+                android:title="Share" />
+
+        </menu>
+    </item>
+</menu>
