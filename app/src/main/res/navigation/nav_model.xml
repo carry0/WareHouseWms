@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_model"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_model"
     app:startDestination="@id/adjustFragment">
 
     <fragment
         android:id="@+id/adjustFragment"
-        android:name="com.yf.warehousewms.model.home.adjust.AdjustFragment"
-        android:label="AdjustFragment" />
+        android:name="com.yf.warehousewms.model.home.adjust.fm.AdjustFragment"
+        android:label="AdjustFragment">
+        <action
+            android:id="@+id/action_to_adjustDetail"
+            app:destination="@id/adjustDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adjustDetailFragment"
+        android:name="com.yf.warehousewms.model.home.adjust.fm.AdjustDetailFragment"
+        android:label="AdjustDetailFragment" />
+    <fragment
+        android:id="@+id/adjustCarrierFragment"
+        android:name="com.yf.warehousewms.model.home.adjust.fm.AdjustCarrierFragment"
+        android:label="AdjustCarrierFragment" >
+        <action
+            android:id="@+id/action_to_adjust"
+            app:destination="@id/adjustFragment" />
+    </fragment>
 </navigation>

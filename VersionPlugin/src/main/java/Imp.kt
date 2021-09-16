@@ -24,6 +24,8 @@ object Imp {
 
     const val glide_version = "4.11.0"
 
+    const val fast_json_version = "1.1.71.android"
+
     //====================================build.gradle中原有的依赖================================================//
     const val appcompat = "androidx.appcompat:appcompat:${appcompat_version}"
 
@@ -83,6 +85,10 @@ object Imp {
 
     const val network_model = ":network"
 
+    //------------------------------------navigation------------------------------------//
     const val navigation_fragment = "androidx.navigation:navigation-fragment:${navigation_version}"
     const val navigation_ui = "androidx.navigation:navigation-ui:${navigation_version}"
+
+    //JSON解析
+    const val fast_json = "com.alibaba:fastjson:${fast_json_version}"
 }

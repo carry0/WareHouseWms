@@ -1,4 +1,4 @@
-package com.yf.network.callback;
+package com.yf.common.base;
 
 import com.google.gson.annotations.SerializedName;
 

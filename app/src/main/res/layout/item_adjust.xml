@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkbox1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:checked="false" />
+
+        <TextView
+            android:id="@+id/item1"
+            android:layout_width="100dip"
+            android:layout_height="match_parent"
+            android:text="布号" />
+
+
+        <TextView
+            android:id="@+id/item2"
+            android:layout_width="100dip"
+            android:layout_height="match_parent"
+            android:text="色号" />
+
+
+        <TextView
+            android:id="@+id/item3"
+            android:layout_width="100dip"
+            android:layout_height="match_parent"
+            android:text="颜色" />
+
+
+        <TextView
+            android:id="@+id/item4"
+            android:layout_width="120dip"
+            android:layout_height="match_parent"
+            android:text="缸号" />
+
+        <TextView
+            android:id="@+id/item5"
+            android:layout_width="100dip"
+            android:layout_height="match_parent"
+            android:text="扫描条数" />
+
+        <TextView
+            android:id="@+id/item6"
+            android:layout_width="100dip"
+            android:layout_height="match_parent"
+            android:text="扫描重量" />
+    </LinearLayout>
+
+</layout>

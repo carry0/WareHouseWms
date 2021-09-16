@@ -12,7 +12,6 @@ import com.yf.warehousewms.databinding.ItemHomeMenuBinding;
  * @cerate 2021/9/6 11:40
  **/
 public class MenuManageAdapter extends BaseAdapter<ItemHomeMenuBinding, AppAuthBean> {
-
     @Override
     public int initLayout() {
         return R.layout.item_home_menu;

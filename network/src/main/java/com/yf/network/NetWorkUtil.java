@@ -1,6 +1,7 @@
 package com.yf.network;
 
 import com.yf.common.tool.ConfigManage;
+import com.yf.network.Interceptor.BaseUrlInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -49,7 +50,7 @@ public class NetWorkUtil {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .callTimeout(10, TimeUnit.SECONDS)
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-//                .addInterceptor(new BaseUrlInterceptor())
+//                .addInterceptor(new BaseUrlInterceptor())//切换网络URL拦截器
                 .build();
     }
 

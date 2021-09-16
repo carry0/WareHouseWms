@@ -7,4 +7,12 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/button_login_selector</item>
     </style>
+
+    <!--    竖分割线-->
+    <style name="vertical_guideline">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="layout_constraintGuide_percent">0.5</item>
+    </style>
 </resources>

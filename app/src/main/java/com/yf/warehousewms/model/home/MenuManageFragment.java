@@ -16,11 +16,14 @@ import com.yf.warehousewms.App;
 import com.yf.warehousewms.databinding.FragmentMenuBinging;
 import com.yf.warehousewms.model.home.adapter.MenuManageAdapter;
 
+import java.lang.ref.WeakReference;
+
 /**
  * @Author
  * @cerate 2021/9/6 11:28
  **/
 public class MenuManageFragment extends BaseFragment<FragmentMenuBinging> {
+    WeakReference<MenuManageAdapter> weakReference;
     MenuManageAdapter adapter;
     LoginBean loginBean;
 
@@ -31,7 +34,8 @@ public class MenuManageFragment extends BaseFragment<FragmentMenuBinging> {
 
     @Override
     protected void initView() {
-        adapter = new MenuManageAdapter();
+        weakReference = new WeakReference<>(new MenuManageAdapter());
+        adapter = weakReference.get();
         binding.rvHome.setAdapter(adapter);
     }
 
@@ -48,9 +52,4 @@ public class MenuManageFragment extends BaseFragment<FragmentMenuBinging> {
         requireActivity().finish();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        adapter = null;
-    }
 }

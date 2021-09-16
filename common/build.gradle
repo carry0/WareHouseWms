@@ -21,7 +21,7 @@ android {
         dataBinding = true
         viewBinding = true
     }
-    
+
     buildTypes {
         release {
             minifyEnabled false
@@ -61,4 +61,6 @@ dependencies {
     //---------------------------------------navigation工具-------------------------------------//
     api(Imp.navigation_ui)
     api(Imp.navigation_fragment)
+    //-----------------------JSON解析-----------------------//
+    api(Imp.fast_json)
 }

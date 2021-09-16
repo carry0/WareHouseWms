@@ -48,13 +48,9 @@ public class MenuManageActivity extends BaseActivity<MenuManageBinding> {
 
     @Override
     protected void initView() {
-        String user = (String) SpModel.getInstance(App.getInstance(),
-                ConfigManage.APP_TABLE).getData(ConfigManage.USER_NAME, ConfigManage.USER_NAME);
         String bean = (String) SpModel.getInstance(App.getInstance(),
                 ConfigManage.APP_TABLE).getData(ConfigManage.HOME_MENU, ConfigManage.HOME_MENU);
         loginBean = new Gson().fromJson(bean, LoginBean.class);
-        binding.tbMain.setSubtitle("操作人:" + user);
-        setSupportActionBar(binding.tbMain);
         initNavigation();
         setMenuItemTitle();
     }
@@ -82,6 +78,7 @@ public class MenuManageActivity extends BaseActivity<MenuManageBinding> {
         appBarConfiguration = new AppBarConfiguration.Builder(controller.getGraph()).setOpenableLayout(binding.drawerLayout).build();
         setupWithNavController(binding.tbMain, controller, appBarConfiguration);
         setupWithNavController(binding.nvMain, controller);
+        binding.tbMain.setSubtitle(isHideToolbar ?"操作人："+loginBean.getUsername():null);
         if (!isHideToolbar) {binding.tbMain.setNavigationOnClickListener(v -> onBackPressed());}
         //菜单中点击事件处理
         if (isHideToolbar) binding.nvMain.setNavigationItemSelectedListener(item -> {
