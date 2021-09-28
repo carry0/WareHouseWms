@@ -1,22 +1,11 @@
 package com.yf.warehousewms;
 
-import android.app.Application;
+import com.yf.common.AppCommon;
 
 /**
  * @Author
  * @cerate 2021/9/2 14:59
  **/
-public class App extends Application {
+public class App extends AppCommon {
 
-    private static App INSTANCE;
-
-    public static App getInstance() {
-        return INSTANCE;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        INSTANCE = this;
-    }
 }

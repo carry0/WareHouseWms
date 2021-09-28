@@ -60,8 +60,6 @@ public class LoginRepository {
     interface LoginApi {
         /**
          * 登录
-         *
-         * @param jsonObject 参数
          * @return 用户信息
          */
         @POST("/shYf/sh/android/login")
@@ -75,6 +73,10 @@ public class LoginRepository {
         @GET("/shYf/sh/android/getUpdateInfo")
         Observable<VersionBean> getUpdateInfo();
 
+        /**
+         * 更换URL
+         * @return JSONObject
+         */
         @Headers({"base_url:wms"})
         @POST("/a/web/webServicesByNPo")
         Observable<JSONObject> webServicesByNPo(@Body JsonObject jsonObject);

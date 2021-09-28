@@ -14,8 +14,8 @@ import okhttp3.Response;
 
 
 /**
- * @Author
- * @cerate 2021/9/2 12:24
+ *
+ * @author w
  **/
 public class BaseUrlInterceptor implements Interceptor {
 

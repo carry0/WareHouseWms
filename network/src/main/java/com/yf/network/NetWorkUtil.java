@@ -1,6 +1,7 @@
 package com.yf.network;
 
 import com.yf.common.tool.ConfigManage;
+import com.yf.network.Interceptor.AddSessionIdInterceptor;
 import com.yf.network.Interceptor.BaseUrlInterceptor;
 
 import java.util.concurrent.TimeUnit;
@@ -12,8 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * @Author
- * @cerate 2021/9/2 14:09
+ * @author  l
  **/
 public class NetWorkUtil {
     private static NetWorkUtil INSTALL;
@@ -24,8 +24,8 @@ public class NetWorkUtil {
             synchronized (NetWorkUtil.class) {
                 if (retrofit == null) {
                     retrofit = new Retrofit.Builder()
-                            .baseUrl(ConfigManage.IP)
                             .client(httpClient())
+                            .baseUrl(ConfigManage.IP)
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();
@@ -49,7 +49,12 @@ public class NetWorkUtil {
         return new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .callTimeout(10, TimeUnit.SECONDS)
-                .addInterceptor(new BaseUrlInterceptor())//切换网络URL拦截器
+                .writeTimeout(10, TimeUnit.SECONDS)
+                //切换网络URL拦截器
+                .addInterceptor(new BaseUrlInterceptor())
+                //保存sessionId拦截器
+                .addInterceptor(new AddSessionIdInterceptor())
+                //输出log日志格式
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
     }
