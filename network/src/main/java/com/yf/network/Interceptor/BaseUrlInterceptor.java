@@ -1,5 +1,7 @@
 package com.yf.network.Interceptor;
 
+import com.yf.common.tool.ConfigManage;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -10,6 +12,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
 /**
  * @Author
  * @cerate 2021/9/2 12:24
@@ -18,23 +21,27 @@ public class BaseUrlInterceptor implements Interceptor {
 
     @Override
     public @NotNull Response intercept(@NotNull Chain chain) throws IOException {
+        //获取request
         Request request = chain.request();
-        HttpUrl oldUrl = request.url();
-        Request.Builder newBuilder = request.newBuilder();
-        List<String> headers = request.headers("");
-        if (headers.size() > 0) {
-            newBuilder.removeHeader("");
-            String get = headers.get(0);
+        //获取request的创建者builder
+        Request.Builder builder = request.newBuilder();
+        //从request中获取headers，通过给定的键url_name
+        List<String> headerValues = request.headers("base_url");
+        if (headerValues.size() > 0) {
+            //如果有这个header，先将配置的header删除，因此header仅用作app和okhttp之间使用
+            builder.removeHeader("base_url");
+            //匹配获得新的BaseUrl
+            String headerValue = headerValues.get(0);
             HttpUrl networkUrl;
-            if (get.equals("0")){
-                networkUrl = HttpUrl.parse("ss");
-            }else {
-                networkUrl = oldUrl;
-                return chain.proceed(newBuilder.url(networkUrl).build());
+            if (ConfigManage.APP_TABLE.equals(headerValue)) {
+                networkUrl = HttpUrl.parse(ConfigManage.CLOUD_IP);
+            } else {
+                networkUrl = HttpUrl.parse(ConfigManage.IP);
             }
-            //从request中获取原有的HttpUrl实例oldUrl
+            //从request中获取原有的HttpUrl实例oldHttpUrl
+            HttpUrl oldHttpUrl = request.url();
             //重建新的HttpUrl，修改需要修改的url部分
-            HttpUrl newFullUrl = oldUrl
+            HttpUrl newFullUrl = oldHttpUrl
                     .newBuilder()
                     .scheme(networkUrl.scheme())
                     .host(networkUrl.host())
@@ -42,8 +49,9 @@ public class BaseUrlInterceptor implements Interceptor {
                     .build();
             //重建这个request，通过builder.url(newFullUrl).build()；
             //然后返回一个response至此结束修改
-            return chain.proceed(newBuilder.url(newFullUrl).build());
+            return chain.proceed(builder.url(newFullUrl).build());
+        } else {
+            return chain.proceed(request);
         }
-        return chain.proceed(request);
     }
 }

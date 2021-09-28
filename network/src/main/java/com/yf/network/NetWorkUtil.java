@@ -49,8 +49,8 @@ public class NetWorkUtil {
         return new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .callTimeout(10, TimeUnit.SECONDS)
+                .addInterceptor(new BaseUrlInterceptor())//切换网络URL拦截器
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-//                .addInterceptor(new BaseUrlInterceptor())//切换网络URL拦截器
                 .build();
     }
 

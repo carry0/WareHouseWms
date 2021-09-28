@@ -26,5 +26,6 @@ public class MenuManageAdapter extends BaseAdapter<ItemHomeMenuBinding, AppAuthB
     protected void dataCallBack(ItemHomeMenuBinding binding, AppAuthBean data, int position) {
         binding.butSelectMenu.setVisibility(data.getId()==0? View.GONE:View.VISIBLE);
         binding.butSelectMenu.setText(data.getAuth_name());
+        binding.butSelectMenu.setOnClickListener(v -> onItemClickListener.onItemClick(binding.getRoot(),data,position));
     }
 }

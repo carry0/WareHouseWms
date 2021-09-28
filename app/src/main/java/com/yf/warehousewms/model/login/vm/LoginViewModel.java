@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yf.common.bean.LoginBean;
 import com.yf.common.bean.VersionBean;
 import com.yf.warehousewms.model.login.api.LoginRepository;
@@ -53,5 +54,8 @@ public class LoginViewModel extends AndroidViewModel {
 
     public MutableLiveData<LoginBean> doLogin(String name, String password) {
         return repository.doLogin(name, password);
+    }
+    public MutableLiveData<JSONObject> webServicesByNPo(){
+        return repository.webServicesByNPo();
     }
 }

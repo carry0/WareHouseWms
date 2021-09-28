@@ -2,6 +2,7 @@ package com.yf.warehousewms.model.login.api;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import com.yf.common.bean.LoginBean;
 import com.yf.common.bean.VersionBean;
@@ -13,6 +14,8 @@ import java.lang.ref.WeakReference;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
@@ -49,6 +52,11 @@ public class LoginRepository {
         return RequestCallback.doNoRequestHead(api.getUpdateInfo());
     }
 
+    public MutableLiveData<JSONObject> webServicesByNPo() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("cust_po","1");
+        return RequestCallback.doNoRequestHead(api.webServicesByNPo(jsonObject));
+    }
     interface LoginApi {
         /**
          * 登录
@@ -66,5 +74,10 @@ public class LoginRepository {
          */
         @GET("/shYf/sh/android/getUpdateInfo")
         Observable<VersionBean> getUpdateInfo();
+
+        @Headers({"base_url:wms"})
+        @POST("/a/web/webServicesByNPo")
+        Observable<JSONObject> webServicesByNPo(@Body JsonObject jsonObject);
+
     }
 }
