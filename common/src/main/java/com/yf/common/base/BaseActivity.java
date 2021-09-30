@@ -1,6 +1,7 @@
 package com.yf.common.base;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;

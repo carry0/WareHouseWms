@@ -14,4 +14,5 @@ public interface OnItemClickListener<T> {
      * @param position 下标
      */
     void onItemClick(View view,T data, int position);
+
 }

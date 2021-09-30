@@ -19,6 +19,8 @@ public class ConfigManage {
      * 成功码
      */
     public static final int CODE_SUCCESS = 200;
+
+    public static final int CODE_ERROR = 500;
     public static final String GET = "GET";
     public static final String POST = "POST";
     /**

@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.yf.common.base.BaseActivity;
+import com.yf.common.bean.VersionBean;
 import com.yf.common.tool.ConfigManage;
 import com.yf.common.tool.SpModel;
 import com.yf.warehousewms.App;

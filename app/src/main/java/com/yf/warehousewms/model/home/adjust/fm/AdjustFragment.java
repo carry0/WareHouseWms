@@ -3,6 +3,7 @@ package com.yf.warehousewms.model.home.adjust.fm;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.yf.common.base.BaseFragment;
 import com.yf.common.bean.LoginBean;
@@ -23,7 +25,6 @@ import com.yf.warehousewms.model.home.adapter.AdjustAdapter;
 import com.yf.warehousewms.model.home.adjust.vm.AdjustViewModel;
 
 import java.lang.ref.WeakReference;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * 倒仓上架
@@ -55,9 +56,13 @@ public class AdjustFragment extends BaseFragment<FragmentAdjustBinding> {
     }
 
     private void putAway() {
+//        JSONObject jsonObject = doNotBaseNetRequest(viewModel.putAway(2, loginBean.getId()));
+//        if (jsonObject!=null){
+//            Log.i("TAG", "putAway: "+jsonObject.toString());
+//        }
         viewModel.putAway(2,loginBean.getId()).observe(this,jsonObject -> {
-            Log.i("TAG", "putAway: "+jsonObject.toString());
         });
+
     }
 
     @Override

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loading"
+    android:layout_width="200dp"
+    android:layout_height="110dp"
+    android:layout_gravity="center"
+    android:indeterminate="true"
+    android:indeterminateDrawable="@drawable/loading_animation"
+    android:indeterminateTintMode="src_atop" />

@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yf.common.base.BaseRequest;
 import com.yf.common.bean.LoginBean;
 import com.yf.common.tool.ConfigManage;

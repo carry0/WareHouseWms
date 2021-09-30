@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="download_apk_address">warehouse.apk</string>
+    <string name="error_message">is a error!</string>
+    <string name="failed_load_data">加载数据失败</string>
+    <string name="bad_network_view_tip">您的网络不给力，点击屏幕可重新加载</string>
 </resources>
