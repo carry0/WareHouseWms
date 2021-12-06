@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/VersionPlugin" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/model" />
             <option value="$PROJECT_DIR$/network" />
           </set>
         </option>

@@ -4,6 +4,8 @@ import com.yf.common.tool.ConfigManage;
 import com.yf.network.Interceptor.AddSessionIdInterceptor;
 import com.yf.network.Interceptor.BaseUrlInterceptor;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -45,7 +47,7 @@ public class NetWorkUtil {
         return INSTALL;
     }
 
-    private OkHttpClient httpClient() {
+    private @NotNull OkHttpClient httpClient() {
         return new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .callTimeout(10, TimeUnit.SECONDS)

@@ -1,5 +1,6 @@
 package com.yf.warehousewms;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.yf.common.AppCommon;
 
 /**
@@ -8,4 +9,11 @@ import com.yf.common.AppCommon;
  **/
 public class App extends AppCommon {
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        ARouter.openDebug();
+        ARouter.init(App.this);
+    }
 }

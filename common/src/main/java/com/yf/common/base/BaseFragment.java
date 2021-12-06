@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.alibaba.fastjson.JSONObject;
+import com.orhanobut.logger.Logger;
 import com.yf.common.AppCommon;
 import com.yf.common.R;
 import com.yf.common.tool.ConfigManage;
@@ -38,7 +40,7 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
     /**
      * Fragment中由于网络异常导致加载失败显示的布局
      */
-    protected View badNetworkView = null;
+    protected ViewStub badNetworkView = null;
     /**
      * 容器
      */
@@ -50,11 +52,11 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
     /**
      * Fragment中由于服务器异常导致加载失败显示的布局
      */
-    private View loadErrorView = null;
+    private ViewStub loadErrorView = null;
     /**
      * Fragment中界面上没有任何内容时展示的布局
      */
-    private View noContentView = null;
+    private ViewStub noContentView = null;
 
     @Nullable
     @Override
@@ -69,12 +71,12 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
             frameLayout.addView(binding.getRoot());
             frameLayout.addView(inflate);
         }
+        Logger.d("hello");
         return frameLayout;
     }
 
     private void initUpView(View view) {
         View loadingView = View.inflate(view.getContext(), R.layout.loading, null);
-
         loading = loadingView.findViewById(R.id.loading);
         noContentView = view.findViewById(R.id.noContentView);
         badNetworkView = view.findViewById(R.id.badNetworkView);
@@ -173,6 +175,7 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
                 }
                 liveData.setValue(t);
                 showBadNetworkView();
+
 
             }
         });

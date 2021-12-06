@@ -1,26 +1,21 @@
 package com.yf.warehousewms.model.login;
 
-import android.content.Intent;
 import android.util.Log;
-import android.view.Menu;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.navigation.NavigationView;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.yf.common.base.BaseActivity;
-import com.yf.common.bean.VersionBean;
 import com.yf.common.tool.ConfigManage;
 import com.yf.common.tool.SpModel;
 import com.yf.warehousewms.App;
 import com.yf.warehousewms.R;
 import com.yf.warehousewms.databinding.LoginBinding;
-import com.yf.warehousewms.model.home.MenuManageActivity;
 import com.yf.warehousewms.model.login.vm.LoginViewModel;
 
-
+@Route(path = "/warehousewms/model/login/LoginActivity")
 public class LoginActivity extends BaseActivity<LoginBinding> {
     SpModel spModel;
     private LoginViewModel viewModel;
@@ -50,13 +45,14 @@ public class LoginActivity extends BaseActivity<LoginBinding> {
 
 
     private void login() {
-        viewModel.doLogin("admin", "Ridko2019").observe(this, loginBean -> {
-            spModel.putData(ConfigManage.HOME_MENU,new Gson().toJson(loginBean));
-            spModel.putData(ConfigManage.USER_NAME, "admin");
-            spModel.putData(ConfigManage.USER_PASSWORD, "Ridko2019");
-            startActivity(new Intent(LoginActivity.this, MenuManageActivity.class));
-            finish();
-        });
+        ARouter.getInstance().build("/test/testActivity").navigation();
+//        viewModel.doLogin("admin", "Ridko2019").observe(this, loginBean -> {
+//            spModel.putData(ConfigManage.HOME_MENU,new Gson().toJson(loginBean));
+//            spModel.putData(ConfigManage.USER_NAME, "admin");
+//            spModel.putData(ConfigManage.USER_PASSWORD, "Ridko2019");
+//            startActivity(new Intent(LoginActivity.this, MenuManageActivity.class));
+//            finish();
+//        });
     }
 
     @Override

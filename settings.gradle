@@ -1,3 +1,4 @@
+include ':model'
 include ':common'
 include ':network'
 include ':app'

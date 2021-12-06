@@ -26,6 +26,13 @@ object Imp {
 
     const val fast_json_version = "1.1.71.android"
 
+    const val logger_version = "2.2.0"
+
+    const val network_model = ":network"
+
+    const val model = ":model"
+
+
     //====================================build.gradle中原有的依赖================================================//
     const val appcompat = "androidx.appcompat:appcompat:${appcompat_version}"
 
@@ -39,13 +46,44 @@ object Imp {
 
     const val ext_junit = "androidx.test.ext:junit:${ext_junit_version}"
 
-    const val espresso: String = "androidx.test.espresso:espresso-core:${espresso_version}"
+    const val espresso = "androidx.test.espresso:espresso-core:${espresso_version}"
     //====================================================================================//
 
 
-    //-------------------------------ali-arouter-----------------------------------//
+    //-------------------------------ali-arouter-路由-----------------------------------//
     const val arouter = "com.alibaba:arouter-api:${ali_version}"
     const val arouter_compiler = ("com.alibaba:arouter-compiler:${ali_compiler_version}")
+
+
+
+    //===========================================网络框架=================================//
+    //---------------------------------------OkHttp3-------------------------------------//
+    const val okhttp3 = ("com.squareup.okhttp3:okhttp:${OkHttp_version}")
+    const val okhttp3_logging = ("com.squareup.okhttp3:logging-interceptor:${OkHttp_version}")
+
+    //---------------------------------------retrofit2-------------------------------------//
+    const val retrofit2 = ("com.squareup.retrofit2:retrofit:${retrofit2_version}")
+    const val retrofit2_gson = ("com.squareup.retrofit2:converter-gson:${retrofit2_version}")
+    const val retrofit2_adapter = ("com.squareup.retrofit2:adapter-rxjava2:${retrofit2_version}")
+
+    //---------------------------------------rxjava2-------------------------------------//
+    const val rxjava2 = ("io.reactivex.rxjava2:rxjava:${rxjava2_version}")
+    const val rx_android = ("io.reactivex.rxjava2:rxandroid:${rx_android_version}")
+    //====================================================================================//
+
+
+    //---------------------------------------materialUI工具-------------------------------------//
+    const val material = ("com.google.android.material:material:${material_version}")
+
+    const val glide = "com.github.bumptech.glide:glide:${glide_version}"
+
+    const val glide_compiler = "com.github.bumptech.glide:compiler:${glide_version}"
+
+
+    //=====================================JetPack架构===================================//
+    //------------------------------------navigation------------------------------------//
+    const val navigation_fragment = "androidx.navigation:navigation-fragment:${navigation_version}"
+    const val navigation_ui = "androidx.navigation:navigation-ui:${navigation_version}"
 
     //---------------------------------------room-------------------------------------//
     const val room = "androidx.room:room-runtime:${room_version}"
@@ -62,33 +100,12 @@ object Imp {
 
     // Test helpers
     const val room_testing = "androidx.room:room-testing:${room_version}"
+    //====================================================================================//
 
-    //---------------------------------------OkHttp3-------------------------------------//
-    const val okhttp3 = ("com.squareup.okhttp3:okhttp:${OkHttp_version}")
-    const val okhttp3_logging = ("com.squareup.okhttp3:logging-interceptor:${OkHttp_version}")
 
-    //---------------------------------------retrofit2-------------------------------------//
-    const val retrofit2 = ("com.squareup.retrofit2:retrofit:${retrofit2_version}")
-    const val retrofit2_gson = ("com.squareup.retrofit2:converter-gson:${retrofit2_version}")
-    const val retrofit2_adapter = ("com.squareup.retrofit2:adapter-rxjava2:${retrofit2_version}")
-
-    //---------------------------------------rxjava2-------------------------------------//
-    const val rxjava2 = ("io.reactivex.rxjava2:rxjava:${rxjava2_version}")
-    const val rx_android = ("io.reactivex.rxjava2:rxandroid:${rx_android_version}")
-
-    //---------------------------------------materialUI工具-------------------------------------//
-    const val material = ("com.google.android.material:material:${material_version}")
-
-    const val glide = "com.github.bumptech.glide:glide:${glide_version}"
-
-    const val glide_compiler = "com.github.bumptech.glide:compiler:${glide_version}"
-
-    const val network_model = ":network"
-
-    //------------------------------------navigation------------------------------------//
-    const val navigation_fragment = "androidx.navigation:navigation-fragment:${navigation_version}"
-    const val navigation_ui = "androidx.navigation:navigation-ui:${navigation_version}"
-
-    //JSON解析
+    //---------------------------------------JSON解析--------------------------------------------//
     const val fast_json = "com.alibaba:fastjson:${fast_json_version}"
+
+    //------------------------------------------日志记录-------------------------------------------------------//
+    const val logger = "com.orhanobut:logger:${logger_version}"
 }

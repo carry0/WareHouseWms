@@ -15,6 +15,7 @@ android {
 
         testInstrumentationRunner Config.testInstrumentationRunner
         consumerProguardFiles Config.consumerProguardFiles
+
     }
 
     buildFeatures {
@@ -63,4 +64,8 @@ dependencies {
     api(Imp.navigation_fragment)
     //-----------------------JSON解析-----------------------//
     api(Imp.fast_json)
+
+    //-------------------------------日志记录-----------------------------------//
+    api(Imp.logger)
+
 }

@@ -56,12 +56,12 @@ public class AdjustFragment extends BaseFragment<FragmentAdjustBinding> {
     }
 
     private void putAway() {
-//        JSONObject jsonObject = doNotBaseNetRequest(viewModel.putAway(2, loginBean.getId()));
-//        if (jsonObject!=null){
-//            Log.i("TAG", "putAway: "+jsonObject.toString());
-//        }
-        viewModel.putAway(2,loginBean.getId()).observe(this,jsonObject -> {
-        });
+        JSONObject jsonObject = doNotBaseNetRequest(viewModel.putAway(2, loginBean.getId()));
+        if (jsonObject!=null){
+            Log.i("TAG", "putAway: "+jsonObject.toString());
+        }
+//        viewModel.putAway(2,loginBean.getId()).observe(this,jsonObject -> {
+//        });
 
     }
 
