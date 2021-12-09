@@ -1,5 +1,7 @@
 package com.yf.loadview.helper;
 
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
@@ -75,10 +77,10 @@ public class DefaultIml implements Iml {
     @Override
     public void showLoadErrorView(String tip) {
         loadFinished();
-        loadErrorView.setVisibility(View.VISIBLE);
-        View view = View.inflate(loadErrorView.getContext(), R.layout.load_error_view, null);
+        View view = View.inflate(loadErrorView.getContext(), R.layout.load_error_view, frameLayout);
         TextView textView = view.findViewById(R.id.loadErrorText);
         textView.setText(tip);
+        loadErrorView.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -105,7 +107,7 @@ public class DefaultIml implements Iml {
     @Override
     public void showNoContentView(String tip) {
         loadFinished();
-        View view = View.inflate(noContentView.getContext(), R.layout.loading, null);
+        View view = View.inflate(noContentView.getContext(), R.layout.loading, frameLayout);
         TextView textView = view.findViewById(R.id.noContentText);
         textView.setText(tip);
         noContentView.setVisibility(View.VISIBLE);
