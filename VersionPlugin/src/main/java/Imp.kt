@@ -32,6 +32,7 @@ object Imp {
 
     const val model = ":model"
 
+    const val load_view = ":loadview"
 
     //====================================build.gradle中原有的依赖================================================//
     const val appcompat = "androidx.appcompat:appcompat:${appcompat_version}"

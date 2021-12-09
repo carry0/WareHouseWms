@@ -1,15 +1,14 @@
 package com.yf.common;
 
-import android.app.Application;
-
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.yf.loadview.AppLoad;
 
 /**
  * @Author
  * @cerate 2021/9/28 14:50
  **/
-public class AppCommon extends Application {
+public class AppCommon extends AppLoad {
 
     private static AppCommon INSTANCE;
 

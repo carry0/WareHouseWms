@@ -1,13 +1,14 @@
 package com.yf.common.base;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+
+import com.yf.loadview.helper.DefaultLoadHelper;
 
 
 /**
@@ -17,11 +18,12 @@ import androidx.databinding.ViewDataBinding;
 public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatActivity {
 
     protected V binding;
-
+    protected DefaultLoadHelper defaultLoadHelper;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, setLayoutId());
+        defaultLoadHelper = new DefaultLoadHelper(binding.getRoot(), this,true);
         initView();
         initListener();
     }
@@ -48,5 +50,6 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
     protected void onDestroy() {
         super.onDestroy();
         binding = null;
+        defaultLoadHelper = null;
     }
 }

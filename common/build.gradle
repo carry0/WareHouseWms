@@ -36,12 +36,10 @@ android {
 }
 
 dependencies {
-    implementation(Imp.constraintlayout)
-    implementation(Imp.legacy_support_v4)
-    implementation(Imp.annotations)
     testImplementation(Imp.junit)
     androidTestImplementation(Imp.ext_junit)
     androidTestImplementation(Imp.espresso)
+
 
     //---------------------------------------OkHttp3-------------------------------------//
     api(Imp.okhttp3)
@@ -67,5 +65,8 @@ dependencies {
 
     //-------------------------------日志记录-----------------------------------//
     api(Imp.logger)
+
+    //-------------------------------根据网络请求回调切换视图-----------------------------------//
+    api project(Imp.load_view)
 
 }

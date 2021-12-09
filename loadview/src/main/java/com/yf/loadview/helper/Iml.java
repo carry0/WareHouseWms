@@ -1,4 +1,4 @@
-package com.yf.common.base.loadhelper;
+package com.yf.loadview.helper;
 
 import android.view.View;
 

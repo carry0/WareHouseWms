@@ -1,4 +1,4 @@
-package com.yf.common.base.loadhelper;
+package com.yf.loadview.helper;
 
 import android.view.View;
 import android.view.ViewStub;
@@ -6,11 +6,11 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yf.common.AppCommon;
-import com.yf.common.R;
+import com.yf.loadview.AppLoad;
+import com.yf.loadview.R;
 
 /**
- * 由于网络变化而变化的界面
+ * 操作界面：由于网络变化而变化的界面，修改layout布局等等
  *
  * @author lwr
  **/
@@ -86,7 +86,7 @@ public class DefaultIml implements Iml {
      */
     @Override
     public void showBadNetworkView(View.OnClickListener onClickListener) {
-        Toast.makeText(AppCommon.getInstance(), AppCommon.getInstance().getString(R.string.bad_network_view_tip), Toast.LENGTH_SHORT).show();
+        Toast.makeText(AppLoad.getInstance(), AppLoad.getInstance().getString(R.string.bad_network_view_tip), Toast.LENGTH_SHORT).show();
         loadFinished();
         binding.setVisibility(View.GONE);
         badNetworkView.setVisibility(View.VISIBLE);

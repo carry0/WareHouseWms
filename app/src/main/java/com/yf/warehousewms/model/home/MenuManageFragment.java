@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
 import com.yf.common.base.BaseFragment;
 import com.yf.common.bean.LoginBean;
 import com.yf.common.tool.ConfigManage;
@@ -43,6 +44,9 @@ public class MenuManageFragment extends BaseFragment<FragmentMenuBinging> {
 
     @Override
     protected void initData() {
+        defaultLoadHelper.getDefaultIml().showBadNetworkView(v -> {
+            Logger.d("刷新");
+        });
         String s = (String) SpModel.getInstance(App.getInstance(),
                 ConfigManage.APP_TABLE).getData(ConfigManage.HOME_MENU, ConfigManage.HOME_MENU);
         loginBean = new Gson().fromJson(s, LoginBean.class);
