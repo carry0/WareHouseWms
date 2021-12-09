@@ -1,41 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <data>
-
-    </data>
-
-    <FrameLayout
+    <ViewStub
+        android:id="@+id/loading"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout="@layout/loading"
+        android:visibility="gone" />
 
-        <ViewStub
-            android:id="@+id/loading"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout="@layout/loading"
-            android:visibility="gone" />
+    <ViewStub
+        android:id="@+id/noContentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/no_content_view"
+        android:visibility="gone" />
 
-        <ViewStub
-            android:id="@+id/noContentView"
-            android:layout="@layout/no_content_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+    <ViewStub
+        android:id="@+id/badNetworkView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/bad_network_view"
+        android:visibility="gone" />
 
-        <ViewStub
-            android:id="@+id/badNetworkView"
-            android:layout="@layout/bad_network_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+    <ViewStub
+        android:id="@+id/loadErrorView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/load_error_view"
+        android:visibility="gone" />
 
-        <ViewStub
-            android:id="@+id/loadErrorView"
-            android:layout="@layout/load_error_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
-
-    </FrameLayout>
-</layout>
+</FrameLayout>
