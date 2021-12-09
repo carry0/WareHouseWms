@@ -2,14 +2,11 @@ package com.yf.common.base;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
@@ -25,6 +22,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.orhanobut.logger.Logger;
 import com.yf.common.AppCommon;
 import com.yf.common.R;
+import com.yf.common.base.loadhelper.DefaultIml;
+import com.yf.common.base.loadhelper.Iml;
 import com.yf.common.tool.ConfigManage;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,23 +31,26 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * @Author
- * @cerate 2021/9/2 15:03
+ * @author lwr 2021/9/2 15:03
  **/
 public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
     protected V binding;
     /**
-     * Fragment中由于网络异常导致加载失败显示的布局
-     */
-    protected ViewStub badNetworkView = null;
-    /**
      * 容器
      */
-    private FrameLayout frameLayout;
+    protected FrameLayout frameLayout;
+    /**
+     * 网络状态返回接口
+     */
+    protected Iml defaultIml;
+    /**
+     * Fragment中由于网络异常导致加载失败显示的布局
+     */
+    private ViewStub badNetworkView = null;
     /**
      * Activity中显示的加载等待的控件
      */
-    private ProgressBar loading = null;
+    private ViewStub loading = null;
     /**
      * Fragment中由于服务器异常导致加载失败显示的布局
      */
@@ -76,8 +78,7 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
     }
 
     private void initUpView(View view) {
-        View loadingView = View.inflate(view.getContext(), R.layout.loading, null);
-        loading = loadingView.findViewById(R.id.loading);
+        loading = view.findViewById(R.id.loading);
         noContentView = view.findViewById(R.id.noContentView);
         badNetworkView = view.findViewById(R.id.badNetworkView);
         loadErrorView = view.findViewById(R.id.loadErrorView);
@@ -85,16 +86,24 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
 
     private void onCreateView(View view) {
         initUpView(view);
-        String TAG = "BaseFragment";
         if (loading == null) {
-            Log.e(TAG, "loading is null");
+            Logger.e("loading is null");
         }
         if (badNetworkView == null) {
-            Log.e(TAG, "badNetworkView is null");
+            Logger.e("badNetworkView is null");
         }
         if (loadErrorView == null) {
-            Log.e(TAG, "loadErrorView is null");
+            Logger.e("loadErrorView is null");
         }
+
+        defaultIml = new DefaultIml(
+                badNetworkView,
+                loading,
+                loadErrorView,
+                noContentView,
+                binding.getRoot(),
+                frameLayout
+        );
     }
 
     @Override
@@ -137,9 +146,8 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
                 liveData.setValue((T) message);
                 if (code == ConfigManage.CODE_ERROR) {
                     Toast.makeText(requireContext(), getString(R.string.bad_network_view_tip), Toast.LENGTH_SHORT).show();
-                    showBadNetworkView();
                 } else {
-                    showLoadErrorView(TextUtils.isEmpty(message) ? (AppCommon.getInstance().getApplicationContext()).getResources().getString(R.string.failed_load_data) : message);
+                    defaultIml.showLoadErrorView(TextUtils.isEmpty(message) ? (AppCommon.getInstance().getApplicationContext()).getResources().getString(R.string.failed_load_data) : message);
                 }
             }
 
@@ -147,7 +155,7 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
             protected void onSuccess(T data) {
                 if (data instanceof List) {
                     if (((List) data).size() == 0) {
-                        showNoContentView("data is null!");
+                        defaultIml.showNoContentView("data is null!");
                     }
                 }
                 liveData.setValue(data);
@@ -162,21 +170,19 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
      * @param dataLive 网络请求
      */
     public <T> T doNotBaseNetRequest(@NotNull MutableLiveData<T> dataLive) {
+        defaultIml.startLoading();
         MutableLiveData<T> liveData = new MutableLiveData<>();
         dataLive.observe(this, t -> {
             if (t == null) {
                 liveData.setValue((T) new JSONObject());
-                showLoadErrorView(TextUtils.isEmpty("message") ? (AppCommon.getInstance().getApplicationContext()).getResources().getString(R.string.failed_load_data) : "message");
+                defaultIml.showLoadErrorView(TextUtils.isEmpty("message") ? (AppCommon.getInstance().getApplicationContext()).getResources().getString(R.string.failed_load_data) : "message");
             } else {
                 if (t instanceof List) {
                     if (((List) t).size() == 0) {
-                        showNoContentView("data is null!");
+                        defaultIml.showNoContentView("data is null!");
                     }
                 }
                 liveData.setValue(t);
-                showBadNetworkView();
-
-
             }
         });
         return liveData.getValue();
@@ -216,59 +222,5 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
         super.onDestroyView();
         binding = null;
         frameLayout = null;
-    }
-
-    public void startLoading() {
-        loadFinished();
-        loading.setVisibility(View.VISIBLE);
-    }
-
-    public void loadFinished() {
-        loading.setVisibility(View.GONE);
-        loadErrorView.setVisibility(View.GONE);
-        badNetworkView.setVisibility(View.GONE);
-        noContentView.setVisibility(View.GONE);
-        binding.getRoot().setVisibility(View.GONE);
-    }
-
-    /**
-     * 当Activity中的加载内容服务器返回失败，通过此方法显示提示界面给用户。
-     *
-     * @param tip 界面中的提示信息
-     */
-    public void showLoadErrorView(String tip) {
-        loadFinished();
-        loadErrorView.setVisibility(View.VISIBLE);
-        View view = View.inflate(loadErrorView.getContext(), R.layout.load_error_view, null);
-        TextView textView = view.findViewById(R.id.loadErrorText);
-        textView.setText(tip);
-    }
-
-    /**
-     * 当Activity中的内容因为网络原因无法显示的时候，通过此方法显示提示界面给用户。
-     */
-    public void showBadNetworkView() {
-        Toast.makeText(requireContext(), getString(R.string.bad_network_view_tip), Toast.LENGTH_SHORT).show();
-        loadFinished();
-        binding.getRoot().setVisibility(View.GONE);
-        badNetworkView.setVisibility(View.VISIBLE);
-        frameLayout.setOnClickListener(v -> {
-            badNetworkView.setVisibility(View.GONE);
-            binding.getRoot().setVisibility(View.VISIBLE);
-            Log.i("TAG", "doNotBaseNetRequest: ");
-        });
-    }
-
-    /**
-     * 当Activity中没有任何内容的时候，通过此方法显示提示界面给用户。
-     *
-     * @param tip 界面中的提示信息
-     */
-    public void showNoContentView(String tip) {
-        loadFinished();
-        View view = View.inflate(noContentView.getContext(), R.layout.loading, null);
-        TextView textView = view.findViewById(R.id.noContentText);
-        textView.setText(tip);
-        noContentView.setVisibility(View.VISIBLE);
     }
 }

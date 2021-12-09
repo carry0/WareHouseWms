@@ -24,4 +24,5 @@ public class AppCommon extends Application {
         //日志
         Logger.addLogAdapter(new AndroidLogAdapter());
     }
+
 }

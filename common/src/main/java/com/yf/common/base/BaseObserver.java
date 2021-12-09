@@ -11,7 +11,7 @@ import com.yf.common.tool.ConfigManage;
  * @Author
  * @cerate 2021/9/29 12:26
  **/
-public abstract class BaseObserver<T> implements Observer<BaseRequest<T>>{
+public abstract class BaseObserver<T> implements Observer<BaseRequest<T>> {
     @Override
     public void onChanged(BaseRequest<T> tBaseRequest) {
         if (tBaseRequest !=null){
