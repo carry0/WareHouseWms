@@ -36,11 +36,6 @@ public class DefaultIml implements Iml {
     private final ViewStub noContentView;
 
     /**
-     * groupView
-     */
-    private final FrameLayout frameLayout;
-
-    /**
      * 显示数据界面
      */
     private final View binding;
@@ -49,14 +44,12 @@ public class DefaultIml implements Iml {
                       ViewStub loading,
                       ViewStub loadErrorView,
                       ViewStub noContentView,
-                      View binding,
-                      FrameLayout frameLayout) {
+                      View binding){
         this.badNetworkView = badNetworkView;
         this.loading = loading;
         this.loadErrorView = loadErrorView;
         this.noContentView = noContentView;
         this.binding = binding;
-        this.frameLayout = frameLayout;
     }
 
     @Override
@@ -77,9 +70,10 @@ public class DefaultIml implements Iml {
     @Override
     public void showLoadErrorView(String tip) {
         loadFinished();
-        View view = View.inflate(loadErrorView.getContext(), R.layout.load_error_view, frameLayout);
-        TextView textView = view.findViewById(R.id.loadErrorText);
-        textView.setText(tip);
+        //ViewStub只能inflate()一次
+        View inflate = loadErrorView.inflate();
+        TextView viewById = inflate.findViewById(R.id.loadErrorText);
+        viewById.setText(tip);
         loadErrorView.setVisibility(View.VISIBLE);
     }
 
@@ -91,12 +85,14 @@ public class DefaultIml implements Iml {
         Toast.makeText(AppLoad.getInstance(), AppLoad.getInstance().getString(R.string.bad_network_view_tip), Toast.LENGTH_SHORT).show();
         loadFinished();
         binding.setVisibility(View.GONE);
-        badNetworkView.setVisibility(View.VISIBLE);
-        frameLayout.setOnClickListener(v -> {
+        badNetworkView.inflate().setOnClickListener(v -> {
             badNetworkView.setVisibility(View.GONE);
             binding.setVisibility(View.VISIBLE);
             onClickListener.onClick(v);
         });
+        badNetworkView.setVisibility(View.VISIBLE);
+
+
     }
 
     /**
@@ -107,8 +103,8 @@ public class DefaultIml implements Iml {
     @Override
     public void showNoContentView(String tip) {
         loadFinished();
-        View view = View.inflate(noContentView.getContext(), R.layout.loading, frameLayout);
-        TextView textView = view.findViewById(R.id.noContentText);
+        View inflate = noContentView.inflate();
+        TextView textView = inflate.findViewById(R.id.noContentText);
         textView.setText(tip);
         noContentView.setVisibility(View.VISIBLE);
     }

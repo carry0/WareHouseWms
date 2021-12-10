@@ -7,28 +7,24 @@
         android:id="@+id/loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/loading"
-        android:visibility="gone" />
+        android:layout="@layout/loading" />
 
     <ViewStub
         android:id="@+id/noContentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/no_content_view"
-        android:visibility="gone" />
+        android:layout="@layout/no_content_view" />
 
     <ViewStub
         android:id="@+id/badNetworkView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/bad_network_view"
-        android:visibility="gone" />
+        android:layout="@layout/bad_network_view" />
 
     <ViewStub
         android:id="@+id/loadErrorView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/load_error_view"
-        android:visibility="gone" />
+        android:layout="@layout/load_error_view" />
 
 </FrameLayout>

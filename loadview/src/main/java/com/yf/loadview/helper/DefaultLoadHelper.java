@@ -1,6 +1,5 @@
 package com.yf.loadview.helper;
 
-import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -12,21 +11,22 @@ import com.yf.loadview.R;
 
 /**
  * 用于切换布局,用一个新的布局覆盖在原布局之上
+ *
  * @author lwr 2021/12/9 11:05
  **/
-public class DefaultLoadHelper {
-    /**
-     * 网络状态返回接口
-     */
-    protected Iml defaultIml;
+public class DefaultLoadHelper{
     /**
      * 容器
      */
-    private final FrameLayout group;
+    private  ViewGroup group;
     /**
      * View show data
      */
     private final View binding;
+    /**
+     * 网络状态返回接口
+     */
+    protected Iml defaultIml;
     /**
      * Fragment中由于网络异常导致加载失败显示的布局
      */
@@ -44,41 +44,24 @@ public class DefaultLoadHelper {
      */
     private ViewStub noContentView = null;
 
-    /**
-     * @param isActivity true为activity反正为fragment
-     */
-    public DefaultLoadHelper(@NonNull View view, Activity activity, boolean isActivity) {
+
+    public DefaultLoadHelper(@NonNull View view) {
         super();
         this.binding = view;
-        group = new FrameLayout(activity);
-        ViewGroup parent;
-        ViewGroup.LayoutParams layoutParams;
-        View inflate = View.inflate(activity, R.layout.layout_lce, null);
-        if (isActivity) {
-            parent = (ViewGroup) view.getParent();
-            layoutParams = parent.getLayoutParams();
-        } else {
-            parent = group;
-            layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        }
-        if (parent == null) {
-            return;
-        } else {
-            if (isActivity) {
-                parent.removeView(view);
-                group.addView(inflate);
-                parent.addView(group, layoutParams);
-            } else {
-                parent.removeView(view);
-                parent.addView(inflate, layoutParams);
-            }
-        }
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        parent.addView(view, params);
+        //获取当前view的LayoutParams
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        //加载ViewStub布局资源
+        View inflate = View.inflate(view.getContext(), R.layout.layout_lce, null);
         onCreateView(inflate);
+        group = (ViewGroup) view.getParent();
+        if (group == null) {
+            group = new FrameLayout(view.getContext());
+            group.addView(view,layoutParams);
+        }
+        group.addView(inflate, layoutParams);
     }
 
-    public FrameLayout getGroup() {
+    public View getGroup() {
         return group;
     }
 
@@ -106,9 +89,7 @@ public class DefaultLoadHelper {
                 loading,
                 loadErrorView,
                 noContentView,
-                binding,
-                group
-        );
+                binding);
     }
 
     public Iml getDefaultIml() {

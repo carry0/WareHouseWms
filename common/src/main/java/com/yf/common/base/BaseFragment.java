@@ -36,7 +36,7 @@ public abstract class BaseFragment<V extends ViewDataBinding> extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = setBinding(inflater, container, savedInstanceState);
-        defaultLoadHelper = new DefaultLoadHelper(binding.getRoot(), requireActivity(),false);
+        defaultLoadHelper = new DefaultLoadHelper(binding.getRoot());
         return defaultLoadHelper.getGroup();
     }
 

@@ -15,6 +15,7 @@ import com.yf.common.base.BaseFragment;
 import com.yf.common.bean.LoginBean;
 import com.yf.common.tool.ConfigManage;
 import com.yf.common.tool.SpModel;
+import com.yf.loadview.helper.DefaultLoadHelper;
 import com.yf.warehousewms.App;
 import com.yf.warehousewms.R;
 import com.yf.warehousewms.databinding.FragmentMenuBinging;

@@ -13,6 +13,7 @@
         android:layout_height="match_parent">
 
         <EditText
+            android:background="#66333333"
             android:text="@={viewModel.name}"
             android:id="@+id/et_name"
             android:layout_width="match_parent"
@@ -22,6 +23,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:background="#66333333"
             android:text="@={viewModel.password}"
             android:id="@+id/et_password"
             android:layout_width="match_parent"
@@ -39,5 +41,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_password" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -23,7 +23,6 @@ public abstract class BaseActivity<V extends ViewDataBinding> extends AppCompatA
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, setLayoutId());
-        defaultLoadHelper = new DefaultLoadHelper(binding.getRoot(), this,true);
         initView();
         initListener();
     }

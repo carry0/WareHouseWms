@@ -10,6 +10,7 @@ import com.orhanobut.logger.Logger;
 import com.yf.common.base.BaseActivity;
 import com.yf.common.tool.ConfigManage;
 import com.yf.common.tool.SpModel;
+import com.yf.loadview.helper.DefaultLoadHelper;
 import com.yf.warehousewms.App;
 import com.yf.warehousewms.R;
 import com.yf.warehousewms.databinding.LoginBinding;
@@ -28,9 +29,8 @@ public class LoginActivity extends BaseActivity<LoginBinding> {
 
     @Override
     public void initView() {
-        defaultLoadHelper.getDefaultIml().showBadNetworkView(v -> {
-            Logger.d("刷新");
-        });
+        defaultLoadHelper = new DefaultLoadHelper(binding.rvList);
+        defaultLoadHelper.getDefaultIml().showLoadErrorView("binding.rvList");
         spModel = SpModel.getInstance(App.getInstance(), ConfigManage.APP_TABLE);
         viewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(LoginViewModel.class);
 //        viewModel.getUpdateInfo().observe(this, versionBean -> {
